@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ImageIcon, Loader2, RefreshCw, Upload, UploadCloud } from 'lucide-react';
 
 const EXAMPLE_URL = 'https://images.pexels.com/photos/5965592/pexels-photo-5965592.jpeg?auto=compress&cs=tinysrgb&w=1024';
 
@@ -10,14 +13,12 @@ env.allowLocalModels = false;
 env.backends.onnx.wasm.proxy = true;
 
 const ImageProcessor: React.FC = () => {
-  const [status, setStatus] = useState<string>('Loading model...');
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [processedImageUrl, setProcessedImageUrl] = useState<string | null>(null);
-  const [containerSize, setContainerSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+  const [originalImage, setOriginalImage] = useState<string | null>(null)
+  const [processedImage, setProcessedImage] = useState<string | null>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const modelRef = useRef<any>(null);
   const processorRef = useRef<any>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const loadModelAndProcessor = async () => {
@@ -39,30 +40,28 @@ const ImageProcessor: React.FC = () => {
           size: { width: 1024, height: 1024 },
         }
       });
-
-      setStatus('Ready');
     };
 
     loadModelAndProcessor();
   }, []);
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e2) => predict(e2.target?.result as string);
+    reader.onload = (e2) => setOriginalImage(e2.target?.result as string);
     reader.readAsDataURL(file);
   };
 
-  const predict = async (url: string) => {
-    setImageUrl(url);
-    setStatus('Analysing...');
+  const removeBackground = async () => {
+    setIsProcessing(true);
 
-    const image = await RawImage.fromURL(url);
-
-    const ar = image.width / image.height;
-    const [cw, ch] = (ar > 720 / 480) ? [720, 720 / ar] : [480 * ar, 480];
-    setContainerSize({ width: cw, height: ch });
+    if (!originalImage) {
+      setIsProcessing(false);
+      return;
+    }
+    const image = await RawImage.fromURL(originalImage);
 
     const { pixel_values } = await processorRef.current(image);
     const { output } = await modelRef.current({ input: pixel_values });
@@ -82,48 +81,113 @@ const ImageProcessor: React.FC = () => {
       ctx.putImageData(pixelData, 0, 0);
     }
 
-    setProcessedImageUrl(canvas.toDataURL());
-    setStatus('Done!');
+    setProcessedImage(canvas.toDataURL());
+    setIsProcessing(false)
+  };
+
+  const resetImages = () => {
+    setOriginalImage(null)
+    setProcessedImage(null)
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
-      <p className="text-center mb-4 text-gray-600">{status}</p>
-      <div className="flex justify-center mb-4 space-x-4">
-        <label className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300">
-          Cargar imagen
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileUpload}
-            accept="image/*"
-            className="hidden"
-          />
-        </label>
-      </div>
-      {imageUrl && (
-        <div className="relative" style={{
-          width: `${containerSize.width}px`,
-          height: `${containerSize.height}px`,
-          maxWidth: '100%',
-          margin: '0 auto',
-        }}>
-          <div
-            className="absolute inset-0 bg-contain bg-no-repeat bg-center"
-            style={{
-              backgroundImage: processedImageUrl ? undefined : `url(${imageUrl})`,
-            }}
-          >
-            {processedImageUrl && (
-              <img 
-                src={processedImageUrl} 
-                alt="Processed" 
-                className="w-full h-full object-contain"
-              />
+    <div className="container mx-auto p-4 max-w-4xl">
+      <h1 className="text-3xl font-bold text-center mb-8">Image Background Remover</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="text-xl font-semibold mb-4">Original Image</h2>
+            {originalImage ? (
+              <div className="relative aspect-square">
+                <img
+                  src={originalImage}
+                  alt="Original"
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            ) : (
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="image-upload"
+                />
+                <label
+                  htmlFor="image-upload"
+                  className="cursor-pointer flex flex-col items-center"
+                >
+                  <Upload className="h-12 w-12 text-gray-400" />
+                  <span className="mt-2 text-sm text-gray-500">Upload an image</span>
+                </label>
+              </div>
             )}
-          </div>
-        </div>
-      )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="text-xl font-semibold mb-4">Processed Image</h2>
+            {processedImage ? (
+              <div className="relative aspect-square">
+                <img
+                  src={processedImage}
+                  alt="Processed"
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            ) : (
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center flex items-center justify-center">
+                <ImageIcon className="h-12 w-12 text-gray-400" />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+        <Button
+          onClick={removeBackground}
+          disabled={!originalImage || isProcessing}
+          className="w-full sm:w-auto"
+        >
+          {isProcessing ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            <>
+              <RefreshCw className="mr-2 h-4 w-4" />
+              {processedImage ? 'Try Again' : 'Remove Background'}
+            </>
+          )}
+        </Button>
+
+        {processedImage && (
+          <Button
+            onClick={resetImages}
+            variant="outline"
+            className="w-full sm:w-auto"
+          >
+            <UploadCloud className="mr-2 h-4 w-4" />
+            Load New Image
+          </Button>
+        )}
+
+        {originalImage && !processedImage && (
+          <Button
+            onClick={resetImages}
+            variant="outline"
+            className="w-full sm:w-auto"
+          >
+            <UploadCloud className="mr-2 h-4 w-4" />
+            Choose Different Image
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
