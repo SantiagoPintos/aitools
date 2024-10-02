@@ -10,7 +10,7 @@ const DynamicImageProcessor = dynamic(
 const Home: React.FC = () => {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Eliminador de fondo de imágenes</h2>
+      <h1 className="text-3xl font-bold text-center mb-8">Image Background Remover</h1>
       <DynamicImageProcessor />
     </div>
   );

@@ -92,57 +92,55 @@ const ImageProcessor: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold text-center mb-8">Image Background Remover</h1>
-      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4">Original Image</h2>
-            {originalImage ? (
-              <div className="relative aspect-square">
+            <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
+              {originalImage ? (
                 <img
                   src={originalImage}
                   alt="Original"
                   className="object-contain w-full h-full"
                 />
-              </div>
-            ) : (
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                  id="image-upload"
-                />
-                <label
-                  htmlFor="image-upload"
-                  className="cursor-pointer flex flex-col items-center"
-                >
-                  <Upload className="h-12 w-12 text-gray-400" />
-                  <span className="mt-2 text-sm text-gray-500">Upload an image</span>
-                </label>
-              </div>
-            )}
+              ) : (
+                <div className="h-full w-full flex items-center justify-center">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="cursor-pointer flex flex-col items-center"
+                  >
+                    <Upload className="h-12 w-12 text-gray-400" />
+                    <span className="mt-2 text-sm text-gray-500">Upload an image</span>
+                  </label>
+                </div>
+              )}
+            </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4">Processed Image</h2>
-            {processedImage ? (
-              <div className="relative aspect-square">
+            <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
+              {processedImage ? (
                 <img
                   src={processedImage}
                   alt="Processed"
                   className="object-contain w-full h-full"
                 />
-              </div>
-            ) : (
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center flex items-center justify-center">
-                <ImageIcon className="h-12 w-12 text-gray-400" />
-              </div>
-            )}
+              ) : (
+                <div className="h-full w-full flex items-center justify-center">
+                  <ImageIcon className="h-12 w-12 text-gray-400" />
+                </div>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
