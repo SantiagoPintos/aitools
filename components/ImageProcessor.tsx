@@ -52,10 +52,18 @@ const ImageProcessor: React.FC = () => {
     reader.readAsDataURL(file);
   };
 
+  // Remove background automatically when an image is uploaded
+  useEffect(() => {
+    if (originalImage) {
+      removeBackground();
+    }
+  }, [originalImage]);
+
   const removeBackground = async () => {
     setIsProcessing(true);
 
     if (!originalImage) {
+      console.error('No image to process');
       setIsProcessing(false);
       return;
     }
