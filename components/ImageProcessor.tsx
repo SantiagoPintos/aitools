@@ -95,7 +95,7 @@ const ImageProcessor: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card>
           <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Original Image</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">Original</h2>
             <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
               {originalImage ? (
                 <img
@@ -127,7 +127,7 @@ const ImageProcessor: React.FC = () => {
 
         <Card>
           <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Processed Image</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">Processed</h2>
             <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
               {processedImage ? (
                 <img
