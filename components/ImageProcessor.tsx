@@ -5,6 +5,7 @@ import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ImageIcon, Loader2, RefreshCw, Upload, UploadCloud } from 'lucide-react';
+import ImageUploader from './ImageUploader';
 
 env.allowLocalModels = false;
 // Proxy the WASM backend to prevent the UI from freezing
@@ -111,20 +112,7 @@ const ImageProcessor: React.FC = () => {
                 />
               ) : (
                 <div className="h-full w-full flex items-center justify-center">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                    id="image-upload"
-                  />
-                  <label
-                    htmlFor="image-upload"
-                    className="cursor-pointer flex flex-col items-center"
-                  >
-                    <Upload className="h-12 w-12 text-gray-400" />
-                    <span className="mt-2 text-sm text-gray-500">Upload an image</span>
-                  </label>
+                  <ImageUploader onImageUpload={handleImageUpload} originalImage={originalImage} />
                 </div>
               )}
             </div>
