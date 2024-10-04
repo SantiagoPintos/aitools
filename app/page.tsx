@@ -2,6 +2,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar';
+import Landing from '../components/Landing';
 
 const DynamicImageProcessor = dynamic(
   () => import('../components/ImageProcessor').then(module => module.default), 
@@ -12,7 +13,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <DynamicImageProcessor />
+      <Landing />
     </div>
   );
 };
