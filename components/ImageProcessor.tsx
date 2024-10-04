@@ -11,7 +11,7 @@ import { useAppContext } from '@/context/ImageContext';
 env.allowLocalModels = false;
 // Proxy the WASM backend to prevent the UI from freezing
 env.backends.onnx.wasm.proxy = true;
-//enable wasm simd and multi-threading to speed up the inference
+// Enable WASM simd and multi-threading to speed up the inference
 env.backends.onnx.wasm.simd = true;
 env.backends.onnx.wasm.numThreads = 4;
 
@@ -24,6 +24,11 @@ const ImageProcessor: React.FC = () => {
 
   useEffect(() => {
     init();
+    return () => {
+      setOriginalImage(null);
+      setProcessedImage(null);
+      sessionStorage.clear();
+    };
   }, []);
 
   const init = async () => {
