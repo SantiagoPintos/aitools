@@ -4,8 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ImageIcon, Loader2, RefreshCw, Upload, UploadCloud } from 'lucide-react';
+import { ImageIcon, Loader2, RefreshCw, UploadCloud } from 'lucide-react';
 import ImageUploader from './ImageUploader';
+import { useAppContext } from '@/context/ImageContext';
 
 env.allowLocalModels = false;
 // Proxy the WASM backend to prevent the UI from freezing
@@ -15,8 +16,7 @@ env.backends.onnx.wasm.simd = true;
 env.backends.onnx.wasm.numThreads = 4;
 
 const ImageProcessor: React.FC = () => {
-  const [originalImage, setOriginalImage] = useState<string | null>(null)
-  const [processedImage, setProcessedImage] = useState<string | null>(null)
+  const { originalImage, processedImage, setProcessedImage, setOriginalImage } = useAppContext();
   const [isProcessing, setIsProcessing] = useState(false)
 
   const modelRef = useRef<any>(null);
@@ -52,9 +52,9 @@ const ImageProcessor: React.FC = () => {
     });
   };
   const checkForStoredImage = async () => {
-    const storedImage = sessionStorage.getItem('image');
-    if (storedImage) {
-      setOriginalImage(storedImage);
+    if (originalImage) {
+      console.log('Original image uploaded:', originalImage);
+      removeBackground();
     }
   }
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +69,7 @@ const ImageProcessor: React.FC = () => {
   // Remove background automatically when an image is uploaded
   useEffect(() => {
     if (originalImage) {
+      console.log('Original image uploaded:', originalImage);
       removeBackground();
     }
   }, [originalImage]);
