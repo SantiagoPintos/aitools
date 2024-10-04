@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useAppContext } from '@/context/ImageContext'
 import { Upload } from 'lucide-react'
 
 export default function LandingPage() {
+  const { setOriginalImage } = useAppContext()
   const [dragActive, setDragActive] = useState(false)
   const router = useRouter()
 
@@ -38,6 +40,7 @@ export default function LandingPage() {
     reader.onload = () => {
       //save the image to session storage 
       sessionStorage.setItem('image', reader.result as string)
+      setOriginalImage(reader.result as string)
       router.push('/remove')
     }
     reader.readAsDataURL(file)
