@@ -7,21 +7,21 @@ export default function Component() {
   return (
     <header className="flex h-24 w-full items-center">
       <div className="mx-auto max-w-7xl flex w-full items-center px-4 md:px-10">
-        <Link href="#" className="mr-6 flex items-center" prefetch={false}>
+        <Link href="/" className="mr-6 flex items-center" prefetch={false}>
           <MountainIcon className="h-6 w-6" />
           <span className="sr-only">Background remover</span>
         </Link>
         <nav className="hidden lg:flex items-center space-x-6">
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="/" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Home
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="/about" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             About
           </Link>
         </nav>
         <div className="ml-auto flex items-center space-x-4">
           <Link
-            href="#"
+            href="/remove"
             className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
             prefetch={false}
           >
