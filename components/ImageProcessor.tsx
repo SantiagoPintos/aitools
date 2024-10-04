@@ -23,30 +23,41 @@ const ImageProcessor: React.FC = () => {
   const processorRef = useRef<any>(null);
 
   useEffect(() => {
-    const loadModelAndProcessor = async () => {
-      modelRef.current = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
-        config: { model_type: 'custom' },
-      });
-
-      processorRef.current = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
-        config: {
-          do_normalize: true,
-          do_pad: false,
-          do_rescale: true,
-          do_resize: true,
-          image_mean: [0.5, 0.5, 0.5],
-          feature_extractor_type: "ImageFeatureExtractor",
-          image_std: [1, 1, 1],
-          resample: 2,
-          rescale_factor: 0.00392156862745098,
-          size: { width: 1024, height: 1024 },
-        }
-      });
-    };
-
-    loadModelAndProcessor();
+    init();
   }, []);
 
+  const init = async () => {
+    await loadModelAndProcessor();
+    await checkForStoredImage();
+  }
+  
+  const loadModelAndProcessor = async () => {
+    modelRef.current = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
+      config: { model_type: 'custom' },
+    });
+
+    processorRef.current = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
+      config: {
+        do_normalize: true,
+        do_pad: false,
+        do_rescale: true,
+        do_resize: true,
+        image_mean: [0.5, 0.5, 0.5],
+        feature_extractor_type: "ImageFeatureExtractor",
+        image_std: [1, 1, 1],
+        resample: 2,
+        rescale_factor: 0.00392156862745098,
+        size: { width: 1024, height: 1024 },
+      }
+    });
+  };
+  const checkForStoredImage = async () => {
+    const storedImage = sessionStorage.getItem('image');
+    if (storedImage) {
+      setOriginalImage(storedImage);
+      await removeBackground();
+    }
+  }
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
