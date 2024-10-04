@@ -5,7 +5,7 @@ import { JSX, SVGProps } from "react"
 
 export default function Component() {
   return (
-    <header className="flex h-16 w-full items-center">
+    <header className="flex h-24 w-full items-center">
       <div className="mx-auto max-w-7xl flex w-full items-center px-4 md:px-10">
         <Link href="#" className="mr-6 flex items-center" prefetch={false}>
           <MountainIcon className="h-6 w-6" />
