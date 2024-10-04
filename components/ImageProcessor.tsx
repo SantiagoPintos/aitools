@@ -10,6 +10,9 @@ import ImageUploader from './ImageUploader';
 env.allowLocalModels = false;
 // Proxy the WASM backend to prevent the UI from freezing
 env.backends.onnx.wasm.proxy = true;
+//enable wasm simd and multi-threading to speed up the inference
+env.backends.onnx.wasm.simd = true;
+env.backends.onnx.wasm.numThreads = 4;
 
 const ImageProcessor: React.FC = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null)
