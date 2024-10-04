@@ -22,17 +22,25 @@ export default function LandingPage() {
     e.stopPropagation()
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // Handle the uploaded file here
-      router.push('/remove')
+      handleFile(e.dataTransfer.files[0])
     }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
-      // Handle the uploaded file here
+      handleFile(e.target.files[0])
+    }
+  }
+
+  const handleFile = (file: File) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      //save the image to session storage 
+      sessionStorage.setItem('image', reader.result as string)
       router.push('/remove')
     }
+    reader.readAsDataURL(file)
   }
 
   return (
