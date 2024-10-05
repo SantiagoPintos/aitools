@@ -17,8 +17,6 @@ const nextConfig = {
     
         return config;
     },
-    basePath: '/image',
-    assetPrefix: '/image/',
 };
 
 export default nextConfig;
