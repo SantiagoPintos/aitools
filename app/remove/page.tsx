@@ -12,7 +12,6 @@ const DynamicImageProcessor = dynamic(
 export default function Page() {
     return (
         <>
-            <Navbar />
             <DynamicImageProcessor/>
         </>
     );
