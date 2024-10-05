@@ -21,24 +21,22 @@ export default function ImageOverlay({
             style={{ width: `${width}px`, height: `${height}px` }}
         >
         <div className="absolute inset-0 overflow-hidden">
-          <Image
+          <img
             src={originalSrc}
             alt={`Original ${alt}`}
             height={height}
             width={width}
-            priority={true}
           />
         </div>
         <div 
           className="absolute inset-0 overflow-hidden" 
           style={{ clipPath: 'inset(0 50% 0 0)' }}
         >
-          <Image
+          <img
             src={processedSrc}
             alt={`Processed ${alt}`}
             height={height}
             width={width}
-            priority={true}
           />
         </div>
         <div className="absolute inset-y-0 left-1/2 w-0.5 bg-white"></div>
