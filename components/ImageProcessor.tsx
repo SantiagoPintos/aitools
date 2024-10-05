@@ -74,7 +74,6 @@ const ImageProcessor: React.FC = () => {
   // Remove background automatically when an image is uploaded
   useEffect(() => {
     if (originalImage) {
-      console.log('Original image uploaded:', originalImage);
       removeBackground();
     }
   }, [originalImage]);
