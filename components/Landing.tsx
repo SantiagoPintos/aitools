@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useAppContext } from '@/context/ImageContext'
 import { Upload } from 'lucide-react'
+import ImageOverlay from '@/components/ImageOverlay'
 
 export default function LandingPage() {
   const { setOriginalImage } = useAppContext()
@@ -50,14 +51,7 @@ export default function LandingPage() {
         <div className="flex flex-col md:flex-row min-h-[80vh] justify-center ">
           <div className="flex-1 p-8 md:p-16 md:pt-0 flex flex-col justify-center max-w-2xl">
             <div className="mx-auto">
-              <Image
-                src="/assets/landing.jpg"
-                width={300}
-                height={300}
-                alt="Sample image with background removed"
-                className="mb-8"
-                priority={true}
-              />
+              <ImageOverlay originalSrc={'/assets/landing.png'} processedSrc={'/assets/landing.jpg'} alt={'Image'} />
               <h1 className="text-4xl font-bold mb-4">
                 Private<br />
                 background remover
