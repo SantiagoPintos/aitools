@@ -53,7 +53,7 @@ export default function LandingPage() {
               <Image
                 src="/assets/landing.jpg"
                 width={300}
-                height={400}
+                height={300}
                 alt="Sample image with background removed"
                 className="mb-8"
               />
