@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ImageIcon, Loader2, RefreshCw, UploadCloud } from 'lucide-react';
+import { Download, ImageIcon, Loader2, RefreshCw, UploadCloud } from 'lucide-react';
 import ImageUploader from './ImageUploader';
 import { useAppContext } from '@/context/ImageContext';
 
@@ -116,19 +116,40 @@ const ImageProcessor: React.FC = () => {
     setProcessedImage(null)
   };
 
+  const downloadImage = () => {
+    const link = document.createElement('a');
+    if (processedImage) {
+      link.href = processedImage;
+    }
+    link.download = 'image.png';
+    link.click();
+  }
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
+      <div className="flex flex-col md:flex-row gap-8">
+        <Card className="flex-1">
           <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-4 text-center">Original</h2>
+            {originalImage ? (
+              <h2 className="text-xl font-semibold mb-4 text-center">Image</h2>
+            ) : (
+              <div className="flex items-center justify-center mb-4">
+                <ImageIcon className="h-8 w-8 mr-2" />
+                <span className="text-lg font-semibold">Upload an Image</span>
+                </div>
+                )}
             <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
-              {originalImage ? (
+              {processedImage ? (
+                <img
+                  src={processedImage}
+                  alt="Processed"
+                  className="object-contain w-full h-full"
+                />
+              ) : originalImage ? (
                 <img
                   src={originalImage}
                   alt="Original"
                   className="object-contain w-full h-full"
-                  
                 />
               ) : (
                 <div className="h-full w-full flex items-center justify-center">
@@ -139,66 +160,57 @@ const ImageProcessor: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-4 text-center">Processed</h2>
-            <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
-              {processedImage ? (
-                <img
-                  src={processedImage}
-                  alt="Processed"
-                  className="object-contain w-full h-full"
-                />
-              ) : (
-                <div className="h-full w-full flex items-center justify-center">
-                  <ImageIcon className="h-12 w-12 text-gray-400" />
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        <div className="flex flex-col gap-4 justify-center md:w-64">
+          <Button
+            onClick={removeBackground}
+            disabled={!originalImage || isProcessing}
+            className="w-full"
+          >
+            {isProcessing ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              <>
+                <RefreshCw className="mr-2 h-4 w-4" />
+                {processedImage ? 'Try Again' : 'Remove Background'}
+              </>
+            )}
+          </Button>
 
-      <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-        <Button
-          onClick={removeBackground}
-          disabled={!originalImage || isProcessing}
-          className="w-full sm:w-auto"
-        >
-          {isProcessing ? (
+          {processedImage && (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            <>
-              <RefreshCw className="mr-2 h-4 w-4" />
-              {processedImage ? 'Try Again' : 'Remove Background'}
+              <Button
+                onClick={downloadImage}
+                variant="outline"
+                className="w-full"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download Image
+              </Button>
+              <Button
+                onClick={resetImages}
+                variant="outline"
+                className="w-full"
+              >
+                <UploadCloud className="mr-2 h-4 w-4" />
+                Load New Image
+              </Button>
             </>
           )}
-        </Button>
 
-        {processedImage && (
-          <Button
-            onClick={resetImages}
-            variant="outline"
-            className="w-full sm:w-auto"
-          >
-            <UploadCloud className="mr-2 h-4 w-4" />
-            Load New Image
-          </Button>
-        )}
-
-        {originalImage && !processedImage && (
-          <Button
-            onClick={resetImages}
-            variant="outline"
-            className="w-full sm:w-auto"
-          >
-            <UploadCloud className="mr-2 h-4 w-4" />
-            Choose Different Image
-          </Button>
-        )}
+          {originalImage && !processedImage && (
+            <Button
+              onClick={resetImages}
+              variant="outline"
+              className="w-full"
+            >
+              <UploadCloud className="mr-2 h-4 w-4" />
+              Choose Different Image
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
