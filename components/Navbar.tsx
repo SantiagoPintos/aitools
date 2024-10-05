@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { JSX, SVGProps } from "react"
@@ -8,7 +9,7 @@ export default function Component() {
     <header className="flex h-16 md:h-24 w-full items-center">
       <div className="mx-auto max-w-7xl flex w-full items-center px-4 md:px-10">
         <Link href="/" className="mr-6 flex items-center" prefetch={false}>
-          <MountainIcon className="h-6 w-6" />
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50 ml-3 mt-3 md:ml-2 lg:mb-4">PRIVATEIA</h1>
           <span className="sr-only">Background remover</span>
         </Link>
         <nav className="hidden lg:flex items-center space-x-6">
