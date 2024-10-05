@@ -58,7 +58,6 @@ const ImageProcessor: React.FC = () => {
   };
   const checkForStoredImage = async () => {
     if (originalImage) {
-      console.log('Original image uploaded:', originalImage);
       removeBackground();
     }
   }
@@ -129,6 +128,7 @@ const ImageProcessor: React.FC = () => {
                   src={originalImage}
                   alt="Original"
                   className="object-contain w-full h-full"
+                  
                 />
               ) : (
                 <div className="h-full w-full flex items-center justify-center">
