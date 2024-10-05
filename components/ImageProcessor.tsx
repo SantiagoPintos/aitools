@@ -8,20 +8,14 @@ import { Download, ImageIcon, Loader2, RefreshCw, UploadCloud } from 'lucide-rea
 import ImageUploader from './ImageUploader';
 import { useAppContext } from '@/context/ImageContext';
 
-env.allowLocalModels = false;
-// Proxy the WASM backend to prevent the UI from freezing
-env.backends.onnx.wasm.proxy = true;
-// Enable WASM simd and multi-threading to speed up the inference
-env.backends.onnx.wasm.simd = true;
-env.backends.onnx.wasm.numThreads = 4;
 
 const ImageProcessor: React.FC = () => {
   const { originalImage, processedImage, setProcessedImage, setOriginalImage } = useAppContext();
   const [isProcessing, setIsProcessing] = useState(false)
-
+  
   const modelRef = useRef<any>(null);
   const processorRef = useRef<any>(null);
-
+  
   useEffect(() => {
     init();
     return () => {
@@ -30,13 +24,21 @@ const ImageProcessor: React.FC = () => {
       sessionStorage.clear();
     };
   }, []);
-
+  
   const init = async () => {
     await loadModelAndProcessor();
     await checkForStoredImage();
   }
   
   const loadModelAndProcessor = async () => {
+    // WASM settings
+    env.allowLocalModels = false;
+    // Proxy the WASM backend to prevent the UI from freezing
+    env.backends.onnx.wasm.proxy = true;
+    // Enable WASM simd and multi-threading to speed up the inference
+    env.backends.onnx.wasm.simd = true;
+    env.backends.onnx.wasm.numThreads = 4;
+
     modelRef.current = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
       config: { model_type: 'custom' },
     });
