@@ -17,7 +17,7 @@ export default function ImageOverlay({
     }: ImageOverlayProps) {
     return (
         <div 
-            className={`relative mx-auto`} 
+            className={`relative mb-6`} 
             style={{ width: `${width}px`, height: `${height}px` }}
         >
         <div className="absolute inset-0 overflow-hidden">
@@ -26,6 +26,7 @@ export default function ImageOverlay({
             alt={`Original ${alt}`}
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
         </div>
         <div 
@@ -37,6 +38,7 @@ export default function ImageOverlay({
             alt={`Processed ${alt}`}
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
         </div>
         <div className="absolute inset-y-0 left-1/2 w-0.5 bg-white"></div>
