@@ -24,8 +24,8 @@ export default function ImageOverlay({
           <Image
             src={originalSrc}
             alt={`Original ${alt}`}
-            layout="fill"
-            objectFit="cover"
+            height={height}
+            width={width}
             priority={true}
           />
         </div>
@@ -36,8 +36,8 @@ export default function ImageOverlay({
           <Image
             src={processedSrc}
             alt={`Processed ${alt}`}
-            layout="fill"
-            objectFit="cover"
+            height={height}
+            width={width}
             priority={true}
           />
         </div>
