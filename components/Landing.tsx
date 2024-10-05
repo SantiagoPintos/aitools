@@ -48,7 +48,7 @@ export default function LandingPage() {
 
   return (
         <div className="flex flex-col md:flex-row min-h-[80vh] justify-center ">
-          <div className="flex-1 p-8 md:p-16 md:pt-1 flex flex-col justify-center max-w-2xl">
+          <div className="flex-1 p-8 md:p-16 md:pt-0 flex flex-col justify-center max-w-2xl">
             <div className="mx-auto">
               <Image
                 src="/assets/landing.jpg"
@@ -56,6 +56,7 @@ export default function LandingPage() {
                 height={300}
                 alt="Sample image with background removed"
                 className="mb-8"
+                priority={true}
               />
               <h1 className="text-4xl font-bold mb-4">
                 Private<br />
