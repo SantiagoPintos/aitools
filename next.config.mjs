@@ -2,8 +2,8 @@ const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: isProd ? '/image' : '', 
-    assetPrefix: isProd ? '/image/' : '',
+    basePath: isProd ? '/' : '', 
+    assetPrefix: isProd ? '/' : '',
     webpack: (config, { isServer }) => {
         config.experiments = {
           ...config.experiments,
