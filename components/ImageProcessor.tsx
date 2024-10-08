@@ -125,6 +125,7 @@ const ImageProcessor: React.FC = () => {
     }
     link.download = 'image.png';
     link.click();
+    document.removeChild(link);
   }
 
   return (
@@ -133,13 +134,14 @@ const ImageProcessor: React.FC = () => {
         <Card className="flex-1">
           <CardContent className="p-6">
             {originalImage ? (
-              <h2 className="text-xl font-semibold mb-4 text-center">Image</h2>
+              <h2 className="text-xl font-semibold mb-4 text-center">Processed image</h2>
             ) : (
-              <div className="flex items-center justify-center mb-4">
-                <ImageIcon className="h-8 w-8 mr-2" />
-                <span className="text-lg font-semibold">Upload an Image</span>
+                <div className="flex items-center justify-center mb-4">
+                  <ImageIcon className="h-8 w-8 mr-2" />
+                  <span className="text-lg font-semibold">Upload an Image</span>
                 </div>
-                )}
+                )
+            }
             <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
               {processedImage ? (
                 <img
@@ -189,7 +191,7 @@ const ImageProcessor: React.FC = () => {
                 className="w-full"
               >
                 <Download className="mr-2 h-4 w-4" />
-                Download Image
+                Download image
               </Button>
               <Button
                 onClick={resetImages}
@@ -197,7 +199,7 @@ const ImageProcessor: React.FC = () => {
                 className="w-full"
               >
                 <UploadCloud className="mr-2 h-4 w-4" />
-                Load New Image
+                Load new image
               </Button>
             </>
           )}
@@ -209,7 +211,7 @@ const ImageProcessor: React.FC = () => {
               className="w-full"
             >
               <UploadCloud className="mr-2 h-4 w-4" />
-              Choose Different Image
+              Choose a different image
             </Button>
           )}
         </div>
