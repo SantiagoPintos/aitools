@@ -50,7 +50,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, originalIm
 
   return (
     <div
-      className={`aspect-square w-full overflow-hidden bg-gray-100 rounded-lg ${
+      className={`aspect-square w-full overflow-hidden rounded-lg ${
         isDragging ? 'border-2 border-dashed border-blue-500' : ''
       }`}
       onDragEnter={handleDragEnter}
