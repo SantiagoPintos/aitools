@@ -142,7 +142,7 @@ const ImageProcessor: React.FC = () => {
                 </div>
                 )
             }
-            <div className="aspect-square w-full overflow-hidden bg-gray-100 rounded-lg">
+            <div className="aspect-square w-full overflow-hidden rounded-lg">
               {processedImage ? (
                 <img
                   src={processedImage}
