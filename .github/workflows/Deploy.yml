@@ -48,3 +48,4 @@ jobs:
                   docker pull santiagonbl/privateia:latest
                   docker stop privateia || true
                   docker rm privateia || true
+                  docker run -d --name privateia -p 80:3000 santiagonbl/privateia:latest
