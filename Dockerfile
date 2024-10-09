@@ -2,9 +2,6 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
 COPY package*.json /app
 
 COPY tsconfig.json /app
@@ -12,6 +9,8 @@ COPY tsconfig.json /app
 RUN npm ci
 
 COPY . .
+
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
 
