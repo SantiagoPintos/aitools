@@ -1,0 +1,51 @@
+name: Deploy to VPS with Docker
+
+on:
+  push:
+    branches:
+      - master
+    
+  workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Docker Buildx
+              uses: docker/setup-buildx-action@v3
+              
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                file: ./Dockerfile
+                platforms: linux/amd64,linux/arm64
+                push: true
+                tags: ${{ secrets.DOCKERHUB_USERNAME }}/privateia:latest
+
+            - name: Deploy to VPS
+              env:
+                SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+                SERVER_HOST: ${{ secrets.SERVER_HOST }}
+                SERVER_USER: ${{ secrets.SERVER_USER }}
+                SERVER_PORT: ${{ secrets.SERVER_PORT }}
+              run: |
+                mkdir -p ~/.ssh/
+                echo "$SERVER_SSH_KEY" > ~/.ssh/deploy.key
+                chmod 600 ~/.ssh/deploy.key
+                ssh-keyscan -p $SERVER_PORT $SERVER_HOST >> ~/.ssh/known_hosts
+                ssh -i ~/.ssh/deploy.key -p $SERVER_PORT $SERVER_USER@$SERVER_HOST << 'EOF'
+                  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                  docker pull santiagonbl/privateia:latest
+                  docker stop privateia || true
+                  docker rm privateia || true
+                  docker run -d --name privateia -p 3000:3000 santiagonbl/privateia:latest
