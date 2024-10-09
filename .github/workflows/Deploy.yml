@@ -44,6 +44,7 @@ jobs:
                 chmod 600 ~/.ssh/deploy.key
                 ssh-keyscan -p $SERVER_PORT $SERVER_HOST >> ~/.ssh/known_hosts
                 ssh -i ~/.ssh/deploy.key -p $SERVER_PORT $SERVER_USER@$SERVER_HOST << 'EOF'
+                  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
                   docker pull santiagonbl/privateia:latest
                   docker stop privateia || true
                   docker rm privateia || true
