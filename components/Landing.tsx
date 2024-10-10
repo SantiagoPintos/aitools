@@ -11,7 +11,7 @@ export default function LandingPage() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  AI Tools That Respect Your Privacy
+                  AI tools that respect your privacy
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                   Powerful AI capabilities running entirely in your browser. No data sent to our servers. Your information stays with you.
@@ -26,12 +26,12 @@ export default function LandingPage() {
         </section>
         <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Our Features</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Our features</h2>
             <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
               <Card>
                 <CardHeader>
                   <Cpu className="h-8 w-8 mb-2" />
-                  <CardTitle>Browser-Based Processing</CardTitle>
+                  <CardTitle>Browser-based processing</CardTitle>
                 </CardHeader>
                 <CardContent>
                   All AI computations happen right in your browser, ensuring your data never leaves your device.
@@ -40,7 +40,7 @@ export default function LandingPage() {
               <Card>
                 <CardHeader>
                   <Lock className="h-8 w-8 mb-2" />
-                  <CardTitle>End-to-End Encryption</CardTitle>
+                  <CardTitle>End-to-End encryption</CardTitle>
                 </CardHeader>
                 <CardContent>
                   Your data is encrypted at all times, even when it's being processed by our AI tools.
@@ -49,7 +49,7 @@ export default function LandingPage() {
               <Card>
                 <CardHeader>
                   <Globe className="h-8 w-8 mb-2" />
-                  <CardTitle>Offline Capability</CardTitle>
+                  <CardTitle>Offline capability</CardTitle>
                 </CardHeader>
                 <CardContent>
                   Once loaded, our tools can work offline, giving you the freedom to work anywhere, anytime.
@@ -60,7 +60,7 @@ export default function LandingPage() {
         </section>
         <section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container max-w-full px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">How It Works</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">How it works</h2>
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold">1. Load the Tool</h3>
@@ -126,7 +126,7 @@ export default function LandingPage() {
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Ready to Experience Secure AI?
+                  Ready to experience secure AI?
                 </h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                   Try our privacy-focused AI tools today and see the difference of local, secure processing.
