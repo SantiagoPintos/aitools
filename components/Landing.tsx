@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Cpu, Lock, Globe } from "lucide-react"
-import Link from "next/link"
+import { Cpu, Lock, Globe, Check } from "lucide-react"
 
 export default function LandingPage() {
   return (
@@ -89,7 +88,40 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section id="cta" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-8 md:mb-12">Pricing</h2>
+            <div className="max-w-3xl mx-auto">
+              <Card className="w-full">
+                <CardHeader>
+                  <CardTitle className="text-4xl font-bold text-center">$0</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-2xl font-semibold mb-4">Forever Free</p>
+                  <ul className="space-y-2 mb-6">
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>All AI tools included</span>
+                    </li>
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>Unlimited usage</span>
+                    </li>
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>No credit card required</span>
+                    </li>
+                  </ul>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    Our tools are completely free because we use open-source AI models and all processing occurs in your browser. We believe in democratizing AI while prioritizing your privacy.
+                  </p>
+                  <Button size="lg" className="w-full">Get Started Now</Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        <section id="cta" className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2">
