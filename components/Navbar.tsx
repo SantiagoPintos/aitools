@@ -10,9 +10,6 @@ export default function Component() {
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
             Features
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#how-it-works">
-            How It Works
-          </Link>
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#pricing">
             Pricing
           </Link>

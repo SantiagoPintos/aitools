@@ -63,36 +63,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container max-w-full px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">How it works</h2>
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold">1. Load the Tool</h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  Select the AI tool you need from our suite of privacy-focused applications.
-                </p>
-                <h3 className="text-2xl font-bold">2. Process Locally</h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  The AI model runs entirely in your browser, using your device's processing power.
-                </p>
-                <h3 className="text-2xl font-bold">3. Get Results</h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  Receive your AI-processed results without any data ever leaving your device.
-                </p>
-              </div>
-              <div className="lg:order-first">
-                <img
-                  alt="Browser-based AI processing"
-                  className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center w-full"
-                  height="310"
-                  src="/placeholder.svg?height=310&width=550"
-                  width="550"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
         <section id="pricing" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-8 md:mb-12">Pricing</h2>
