@@ -41,7 +41,7 @@ export default function LandingImage() {
       //save the image to session storage 
       sessionStorage.setItem('image', reader.result as string)
       setOriginalImage(reader.result as string)
-      router.push('/remove')
+      router.push('/image/remove')
     }
     reader.readAsDataURL(file)
   }
