@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Cpu, Lock, Globe, Check } from "lucide-react"
+import Link from "next/link"
 
 export default function LandingPage() {
   return (
@@ -13,12 +14,16 @@ export default function LandingPage() {
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   AI tools that respect your privacy
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 p-2">
                   Powerful AI capabilities running entirely in your browser. No data sent to our servers. Your information stays with you.
                 </p>
               </div>
               <div className="space-x-4">
-                <Button>Get Started</Button>
+                <Button asChild>
+                  <Link href={"/products"}>
+                    Get Started
+                  </Link>
+                </Button>
                 <Button variant="outline">Learn More</Button>
               </div>
             </div>
@@ -115,7 +120,11 @@ export default function LandingPage() {
                   <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
                     Our tools are completely free because we use open-source AI models and all processing occurs in your browser. We believe in democratizing AI while prioritizing your privacy.
                   </p>
-                  <Button size="lg" className="w-full">Get Started Now</Button>
+                  <Button asChild size="lg" className="w-full">
+                    <Link href={"/products"}>
+                      Get Started Now
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -132,7 +141,11 @@ export default function LandingPage() {
                   Try our privacy-focused AI tools today and see the difference of local, secure processing.
                 </p>
               </div>
-              <Button size="lg">Get Started Now</Button>
+              <Button asChild size="lg">
+                  <Link href={"/products"}>
+                    Get Started Now
+                  </Link>
+              </Button>
             </div>
           </div>
         </section>
