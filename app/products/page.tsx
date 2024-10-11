@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ShieldCheck, Image, Music, Video } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { products } from "@/constants/products"
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-flex items-center rounded-md bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">
@@ -10,45 +11,6 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 )
 
 export default function ProductsPage() {
-  const products = [
-    {
-      category: "Image",
-      icon: Image,
-      items: [
-        {
-          name: "Background remover",
-          description: "Remove image backgrounds instantly with our fine-tuned AI model.",
-          action: "/products/background-remover"
-        }
-      ],
-      comingSoon: false
-    },
-    {
-      category: "Audio",
-      icon: Music,
-      items: [
-        {
-          name: "AI Audio Transcriber",
-          description: "Transcribe audio to text with high accuracy using our privacy-focused AI model.",
-          action: "/products/audio-transcriber"
-        }
-      ],
-      comingSoon: true
-    },
-    {
-      category: "Video",
-      icon: Video,
-      items: [
-        {
-          name: "AI Video Summarizer",
-          description: "Generate concise summaries of video content using cutting-edge AI technology.",
-          action: "/products/video-summarizer"
-        }
-      ],
-      comingSoon: true
-    }
-  ]
-
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 container mx-auto px-4 md:px-6 py-8">
