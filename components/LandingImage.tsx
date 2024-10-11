@@ -41,7 +41,7 @@ export default function LandingImage() {
       //save the image to session storage 
       sessionStorage.setItem('image', reader.result as string)
       setOriginalImage(reader.result as string)
-      router.push('/image/remove')
+      router.push('/products/background-remover/remove')
     }
     reader.readAsDataURL(file)
   }
@@ -50,7 +50,7 @@ export default function LandingImage() {
         <div className="flex flex-col md:flex-row min-h-[80vh] justify-center ">
           <div className="flex-1 p-8 lg:px-4 md:p-16 md:pt-0 flex flex-col justify-center max-w-2xl h-4/5">
             <div className="lg:px-14">
-              <ImageOverlay originalSrc={'assets/landing.png'} processedSrc={'assets/landing.jpg'} alt={'Image'} />
+              <ImageOverlay originalSrc={'/assets/landing.png'} processedSrc={'/assets/landing.jpg'} alt={'Image'} />
               <h1 className="text-4xl font-bold mb-4">
                 Private<br />
                 background remover
