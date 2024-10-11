@@ -102,7 +102,7 @@ export default function LandingPage() {
                   <CardTitle className="text-4xl font-bold text-center">$0</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <p className="text-2xl font-semibold mb-4">Forever Free</p>
+                  <p className="text-2xl font-semibold mb-4">Local AI</p>
                   <ul className="space-y-2 mb-6">
                     <li className="flex items-center justify-center">
                       <Check className="mr-2 h-4 w-4" />
