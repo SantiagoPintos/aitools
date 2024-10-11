@@ -1,19 +1,30 @@
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function Component() {
   return (
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link className="flex items-center justify-center" href="/">
-          <span className="font-bold">PRIVATEIA</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
-            Features
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#pricing">
-            Pricing
-          </Link>
-        </nav>
-      </header>
+    <nav className="bg-white ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/">
+              <span className="text-xl font-bold">PRIVATEIA</span>
+            </Link>
+          </div>
+          <div className="flex items-center">
+          <Link href="#features" passHref>
+              <Button variant="ghost" className="ml-4">
+                Features
+              </Button>
+            </Link>
+            <Link href="#pricing" passHref>
+              <Button variant="ghost" className="ml-4">
+                Pricing
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </nav>
   )
 }
