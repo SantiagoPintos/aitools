@@ -18,7 +18,7 @@ export default function ProductsPage() {
         {
           name: "Background remover",
           description: "Remove image backgrounds instantly with our fine-tuned AI model.",
-          action: "/image"
+          action: "/products/background-remover"
         }
       ],
       comingSoon: false
