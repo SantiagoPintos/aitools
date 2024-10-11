@@ -12,12 +12,12 @@ export default function Component() {
             </Link>
           </div>
           <div className="flex items-center">
-          <Link href="#features" passHref>
+          <Link href="/#features" passHref>
               <Button variant="ghost" className="ml-4">
                 Features
               </Button>
             </Link>
-            <Link href="#pricing" passHref>
+            <Link href="/#pricing" passHref>
               <Button variant="ghost" className="ml-4">
                 Pricing
               </Button>
