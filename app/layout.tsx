@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppProvider } from "@/context/ImageContext";
+import { ViewTransitions } from "next-view-transitions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -33,9 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <ViewTransitions>
+            <Navbar />
+              {children}
+            <Footer />
+          </ViewTransitions>
         </AppProvider>
       </body>
     </html>
