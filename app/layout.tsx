@@ -18,8 +18,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Privateia - Background remover",
-  description: "Remove background from images",
+  title: "Privateia",
+  description: "Private AI tools for everyone",
 };
 
 export default function RootLayout({
