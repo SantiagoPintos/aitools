@@ -1,107 +1,125 @@
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import { useAppContext } from '@/context/ImageContext'
-import { Upload } from 'lucide-react'
-import ImageOverlay from '@/components/ImageOverlay'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Cpu, Lock, Globe, Check } from "lucide-react"
+import { Link } from "next-view-transitions"
 
 export default function LandingPage() {
-  const { setOriginalImage } = useAppContext()
-  const [dragActive, setDragActive] = useState(false)
-  const router = useRouter()
-
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true)
-    } else if (e.type === 'dragleave') {
-      setDragActive(false)
-    }
-  }
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setDragActive(false)
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files[0])
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    if (e.target.files && e.target.files[0]) {
-      handleFile(e.target.files[0])
-    }
-  }
-
-  const handleFile = (file: File) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      //save the image to session storage 
-      sessionStorage.setItem('image', reader.result as string)
-      setOriginalImage(reader.result as string)
-      router.push('/remove')
-    }
-    reader.readAsDataURL(file)
-  }
-
   return (
-        <div className="flex flex-col md:flex-row min-h-[80vh] justify-center ">
-          <div className="flex-1 p-8 lg:px-4 md:p-16 md:pt-0 flex flex-col justify-center max-w-2xl h-4/5">
-            <div className="lg:px-14">
-              <ImageOverlay originalSrc={'assets/landing.png'} processedSrc={'assets/landing.jpg'} alt={'Image'} />
-              <h1 className="text-4xl font-bold mb-4">
-                Private<br />
-                background remover
-              </h1>
-              <p className="text-gray-600 mb-8">
-                Transform images instantly with on-device AI.
-                <br /> Everything happens in your browser.
-                <br /> Always free.
-                <br /> Completely private.
-              </p>
-              <div className="lg:hidden">
-                <label className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer">
-                  <Upload className="mr-2 h-5 w-5" />
-                  <span>Upload Image</span>
-                  <input
-                    type="file"
-                    className="sr-only"
-                    accept="image/*"
-                    onChange={handleChange}
-                  />
-                </label>
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-center">
+                  AI tools that respect your privacy
+                </h1>
+                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 p-2">
+                  Powerful AI capabilities running entirely in your browser. No data sent to our servers. Your information stays with you.
+                </p>
+              </div>
+              <div className="space-x-4">
+                <Button asChild>
+                  <Link href={"/products"}>
+                    Get Started
+                  </Link>
+                </Button>
+                <Button variant="outline">Learn More</Button>
               </div>
             </div>
           </div>
-          <div className={`hidden lg:flex flex-1 p-8 lg:px-4 md:p-16 md:pt-1 justify-center max-w-2xl `}>
-            <div className={`border-2 border-dashed rounded-lg flex items-center justify-center h-4/5 w-4/5 ${
-              dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
-            }`}
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-            >
-
-              <div className="text-center">
-                <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                <p className="mt-2 text-sm text-gray-600">Drop your picture here</p>
-                <p className="mt-1 text-xs text-gray-500">or</p>
-                <label className="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black cursor-pointer">
-                  <span>Upload image</span>
-                  <input
-                    type="file"
-                    className="sr-only"
-                    accept="image/*"
-                    onChange={handleChange}
-                    />
-                </label>
-              </div>
+        </section>
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Our features</h2>
+            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
+              <Card>
+                <CardHeader>
+                  <Cpu className="h-8 w-8 mb-2" />
+                  <CardTitle>Browser-based processing</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  All AI computations happen right in your browser, ensuring your data never leaves your device.
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <Lock className="h-8 w-8 mb-2" />
+                  <CardTitle>End-to-End encryption</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  Your data is encrypted at all times, even when it's being processed by our AI tools.
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <Globe className="h-8 w-8 mb-2" />
+                  <CardTitle>Offline capability</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  Once loaded, our tools can work offline, giving you the freedom to work anywhere, anytime.
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </div>
+        </section>
+        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-8 md:mb-12">Pricing</h2>
+            <div className="max-w-3xl mx-auto">
+              <Card className="w-full">
+                <CardHeader>
+                  <CardTitle className="text-4xl font-bold text-center">$0</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-2xl font-semibold mb-4">Local AI</p>
+                  <ul className="space-y-2 mb-6">
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>All AI tools included</span>
+                    </li>
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>Unlimited usage</span>
+                    </li>
+                    <li className="flex items-center justify-center">
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>No credit card required</span>
+                    </li>
+                  </ul>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    Our tools are completely free because we use open-source AI models and all processing occurs in your browser. We believe in democratizing AI while prioritizing your privacy.
+                  </p>
+                  <Button asChild size="lg" className="w-full">
+                    <Link href={"/products"}>
+                      Get Started Now
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        <section id="cta" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+            <div className="container px-4 md:px-6">
+              <div className="flex flex-col items-center space-y-4 text-center">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Ready to experience secure AI?
+                </h2>
+                <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                  Try our privacy-focused AI tools today and see the difference of local, secure processing.
+                </p>
+              </div>
+              <Button asChild size="lg">
+                  <Link href={"/products"}>
+                    Get Started Now
+                  </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
+  </div>
   )
 }

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AutoModel, AutoProcessor, env, RawImage } from '@xenova/transformers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Download, ImageIcon, Loader2, RefreshCw, UploadCloud, AlertCircle } from 'lucide-react';
+import { Download, ImageIcon, Loader2, RefreshCw, UploadCloud, AlertCircle, Clipboard } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import ImageUploader from './ImageUploader';
 import { useAppContext } from '@/context/ImageContext';
@@ -135,6 +135,27 @@ const ImageProcessor: React.FC = () => {
     document.removeChild(link);
   }
 
+  const copyToClipboard = () => {
+    if (processedImage) {
+      const img = document.getElementById('processedImage') as HTMLImageElement;
+      if (img) {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob(blob => {
+            if (blob) {
+              const item = new ClipboardItem({ 'image/png': blob });
+              navigator.clipboard.write([item]);
+            }
+          });
+        }
+      }
+    }
+  }
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="flex flex-col md:flex-row gap-8">
@@ -161,6 +182,7 @@ const ImageProcessor: React.FC = () => {
                 <div className="aspect-square w-full overflow-hidden rounded-lg">
                   {processedImage ? (
                     <img
+                      id="processedImage"
                       src={processedImage}
                       alt="Processed"
                       className="object-contain w-full h-full"
@@ -209,6 +231,14 @@ const ImageProcessor: React.FC = () => {
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download image
+              </Button>
+              <Button
+                onClick={copyToClipboard}
+                variant="outline"
+                className="w-full"
+              >
+                <Clipboard className="mr-2 h-4 w-4" />
+                Copy image
               </Button>
               <Button
                 onClick={resetImages}

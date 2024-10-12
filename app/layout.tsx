@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppProvider } from "@/context/ImageContext";
+import { ViewTransitions } from "next-view-transitions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -18,8 +19,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Privateia - Background remover",
-  description: "Remove background from images",
+  title: "Privateia",
+  description: "Private AI tools for everyone",
 };
 
 export default function RootLayout({
@@ -33,9 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <ViewTransitions>
+            <Navbar />
+              {children}
+            <Footer />
+          </ViewTransitions>
         </AppProvider>
       </body>
     </html>
