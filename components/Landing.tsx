@@ -24,7 +24,11 @@ export default function LandingPage() {
                     Get Started
                   </Link>
                 </Button>
-                <Button variant="outline">Learn More</Button>
+                <Button variant="outline">
+                  <Link href={"/how-it-works"}>
+                    Learn More
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
