@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react";
-import { formatAudioTimestamp } from "../utils/AudioUtils";
-import { webmFixDuration } from "../utils/BlobFix";
+import { formatAudioTimestamp } from "@/app/products/audio-transcriber/utils/AudioUtils";
+import { webmFixDuration } from "@/app/products/audio-transcriber/utils/BlobFix";
 
 function getMimeType() {
     const types = [
