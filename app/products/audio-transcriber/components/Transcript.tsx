@@ -1,8 +1,8 @@
 "use client"
 
 import { useRef, useEffect } from "react";
-import { TranscriberData } from "../hooks/useTranscriber";
-import { formatAudioTimestamp } from "../utils/AudioUtils";
+import { TranscriberData } from "@/app/products/audio-transcriber/hooks/useTranscriber";
+import { formatAudioTimestamp } from "@/app/products/audio-transcriber/utils/AudioUtils";
 
 interface Props {
     transcribedData: TranscriberData | undefined;
