@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react";
-import Modal from "./modal/Modal";
-import AudioPlayer from "./AudioPlayer";
-import { TranscribeButton } from "./TranscribeButton";
-import Constants from "../utils/Constants";
-import { Transcriber } from "../hooks/useTranscriber";
-import AudioRecorder from "./AudioRecorder";
+import Modal from "@/app/products/audio-transcriber/components/modal/Modal";
+import AudioPlayer from "@/app/products/audio-transcriber/components/AudioPlayer";
+import { TranscribeButton } from "@/app/products/audio-transcriber/components/TranscribeButton";
+import Constants from "@/app/products/audio-transcriber/utils/Constants";
+import { Transcriber } from "@/app/products/audio-transcriber/hooks/useTranscriber";
+import AudioRecorder from "@/app/products/audio-transcriber/components/AudioRecorder";
 import { Folder, Mic, Languages } from "lucide-react"
 
 function titleCase(str: string) {
