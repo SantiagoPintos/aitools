@@ -7,7 +7,8 @@ import { TranscribeButton } from "@/app/products/audio-transcriber/components/Tr
 import Constants from "@/app/products/audio-transcriber/utils/Constants";
 import { Transcriber } from "@/app/products/audio-transcriber/hooks/useTranscriber";
 import AudioRecorder from "@/app/products/audio-transcriber/components/AudioRecorder";
-import { Folder, Mic, Languages } from "lucide-react"
+import { FolderOpen, MicVocal, Languages } from "lucide-react"
+import { Button } from "@/components/ui/button";
 
 function titleCase(str: string) {
     str = str.toLowerCase();
@@ -165,10 +166,10 @@ export function AudioManager(props: { transcriber: Transcriber }) {
 
     return (
         <>
-            <div className='flex flex-col justify-center items-center rounded-lg bg-white shadow-xl shadow-black/5 ring-1 ring-slate-700/10'>
-                <div className='flex flex-row space-x-2 py-2 w-full px-2'>
+            <div >
+                <div className='space-x-2'>
                     <FileTile
-                        icon={<Folder />}
+                        icon={<FolderOpen />}
                         text={"From file"}
                         onFileUpdate={(decoded, blobUrl, mimeType) => {
                             props.transcriber.onInputChange();
@@ -182,9 +183,8 @@ export function AudioManager(props: { transcriber: Transcriber }) {
                     />
                     {navigator.mediaDevices && (
                         <>
-                            <VerticalBar />
                             <RecordTile
-                                icon={<Mic />}
+                                icon={<MicVocal />}
                                 text={"Record"}
                                 setAudioData={(e) => {
                                     props.transcriber.onInputChange();
@@ -433,16 +433,13 @@ function Tile(props: {
     onClick?: () => void;
 }) {
     return (
-        <button
-            onClick={props.onClick}
-            className='flex items-center justify-center rounded-lg p-2 bg-blue text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200'
-        >
-            <div className='w-7 h-7'>{props.icon}</div>
+        <Button
+            className='mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black cursor-pointer' 
+            onClick={props.onClick}>
+            <span className="pr-2">{props.icon}</span>
             {props.text && (
-                <div className='ml-2 break-text text-center text-md w-30'>
-                    {props.text}
-                </div>
+                <span>{props.text}</span>
             )}
-        </button>
+        </Button>
     );
 }
