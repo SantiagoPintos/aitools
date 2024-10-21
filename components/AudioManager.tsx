@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import Modal from "@/app/products/audio-transcriber/components/modal/Modal";
-import AudioPlayer from "@/app/products/audio-transcriber/components/AudioPlayer";
-import { TranscribeButton } from "@/app/products/audio-transcriber/components/TranscribeButton";
+import Modal from "@/components/modal/Modal";
+import AudioPlayer from "@/components/AudioPlayer";
+import { TranscribeButton } from "@/components/TranscribeButton";
 import Constants from "@/app/products/audio-transcriber/utils/Constants";
 import { Transcriber } from "@/app/products/audio-transcriber/hooks/useTranscriber";
-import AudioRecorder from "@/app/products/audio-transcriber/components/AudioRecorder";
+import AudioRecorder from "@/components/AudioRecorder";
 import { FolderOpen, MicVocal, Languages } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent,SelectLabel, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
