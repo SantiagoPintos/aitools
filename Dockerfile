@@ -1,18 +1,20 @@
 FROM node:22-alpine
 
+RUN npm install -g pnpm
+
 WORKDIR /app
 
 COPY package*.json /app
 
 COPY tsconfig.json /app
 
-RUN npm ci
+RUN pnpm install
 
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN npm run build
+RUN pnpm build
 
 EXPOSE 3000
 
