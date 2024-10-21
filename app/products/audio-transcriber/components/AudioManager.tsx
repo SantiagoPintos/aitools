@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@/app/products/audio-transcriber/components/modal/Modal";
 import AudioPlayer from "@/app/products/audio-transcriber/components/AudioPlayer";
 import { TranscribeButton } from "@/app/products/audio-transcriber/components/TranscribeButton";
@@ -9,6 +9,7 @@ import { Transcriber } from "@/app/products/audio-transcriber/hooks/useTranscrib
 import AudioRecorder from "@/app/products/audio-transcriber/components/AudioRecorder";
 import { FolderOpen, MicVocal, Languages } from "lucide-react"
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent,SelectLabel, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function titleCase(str: string) {
     str = str.toLowerCase();
@@ -261,6 +262,11 @@ function SettingsModal(props: {
     onClose: () => void;
     transcriber: Transcriber;
 }) {
+    // Set default language to English because the select component of shadcn
+    // doesn't render the placeholder correctly when the value is set using the prop defaultValue
+    useEffect(() => {
+        props.transcriber.setLanguage("en");
+    }, []);
     props.transcriber.setMultilingual(true);
     props.transcriber.setModel("Xenova/whisper-tiny");
     props.transcriber.setQuantized(false);
@@ -273,23 +279,29 @@ function SettingsModal(props: {
             content={
                 <>
                     <div>
-                        <label>Select the source language.</label>
-                        <select
-                            className='mt-1 mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        <Select
                             defaultValue={props.transcriber.language}
-                            onChange={(e) => {
+                            onValueChange={(value) => {
                                 props.transcriber.setLanguage(
-                                    e.target.value,
+                                    value
                                 );
 
                             }}
                         >
-                            {Object.keys(LANGUAGES).map((key, i) => (
-                                <option key={key} value={key}>
-                                    {names[i]}
-                                </option>
-                            ))}
-                        </select>
+                            <SelectTrigger>
+                              <SelectValue placeholder={props.transcriber.language} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>Language:</SelectLabel>
+                                    {Object.keys(LANGUAGES).map((key, i) => (
+                                        <SelectItem  key={key} value={key}>
+                                            {names[i]}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </>
             }
@@ -297,10 +309,6 @@ function SettingsModal(props: {
             onSubmit={() => {}}
         />
     );
-}
-
-function VerticalBar() {
-    return <div className='w-[1px] bg-slate-200'></div>;
 }
 
 function FileTile(props: {
@@ -434,7 +442,7 @@ function Tile(props: {
 }) {
     return (
         <Button
-            className='mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black cursor-pointer' 
+            className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black cursor-pointer' 
             onClick={props.onClick}>
             <span className="pr-2">{props.icon}</span>
             {props.text && (
