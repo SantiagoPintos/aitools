@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { TranscriberData } from "@/app/products/audio-transcriber/hooks/useTranscriber";
 import { formatAudioTimestamp } from "@/app/products/audio-transcriber/utils/AudioUtils";
+import { Button } from '@/components/ui/button';
 
 interface Props {
     transcribedData: TranscriberData | undefined;
@@ -27,7 +28,8 @@ export default function Transcript({ transcribedData }: Props) {
             .trim();
 
         const blob = new Blob([text], { type: "text/plain" });
-        saveBlob(blob, "transcript.txt");
+        const date = new Date().toLocaleDateString();
+        saveBlob(blob, `transcript ${date}.txt`);
     };
     const exportJSON = () => {
         let jsonData = JSON.stringify(transcribedData?.chunks ?? [], null, 2);
@@ -37,7 +39,8 @@ export default function Transcript({ transcribedData }: Props) {
         jsonData = jsonData.replace(regex, "$1[$2 $3]");
 
         const blob = new Blob([jsonData], { type: "application/json" });
-        saveBlob(blob, "transcript.json");
+        const date = new Date().toLocaleDateString();
+        saveBlob(blob, `transcript ${date}.json`);
     };
 
     // Scroll to the bottom when the component updates
@@ -74,19 +77,17 @@ export default function Transcript({ transcribedData }: Props) {
                     </div>
                 ))}
             {transcribedData && !transcribedData.isBusy && (
-                <div className='w-full text-right'>
-                    <button
+                <div className='w-full text-right space-x-4'>
+                    <Button
                         onClick={exportTXT}
-                        className='text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 inline-flex items-center'
                     >
                         Export TXT
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={exportJSON}
-                        className='text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 inline-flex items-center'
                     >
                         Export JSON
-                    </button>
+                    </Button>
                 </div>
             )}
         </div>
