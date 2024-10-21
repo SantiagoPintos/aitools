@@ -54,6 +54,7 @@ export interface Transcriber {
 }
 
 export function useTranscriber(): Transcriber {
+    const [isMounted, setIsMounted] = useState(false);
     const [transcript, setTranscript] = useState<TranscriberData | undefined>(
         undefined,
     );
@@ -61,6 +62,11 @@ export function useTranscriber(): Transcriber {
     const [isModelLoading, setIsModelLoading] = useState(false);
 
     const [progressItems, setProgressItems] = useState<ProgressItem[]>([]);
+
+    // HACK to prevent the component from rendering in the server side and causing a build error
+    useEffect(() => {
+        setIsMounted(true);
+      }, []);
 
     const webWorker = useWorker((event) => {
         const message = event.data;
