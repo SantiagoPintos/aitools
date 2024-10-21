@@ -2,6 +2,7 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { Button } from "@/components/ui/button";
 
 export interface Props {
     show: boolean;
@@ -61,30 +62,28 @@ export default function Modal({
 
                                 <div className='mt-4 flex flex-row-reverse'>
                                     {submitText && (
-                                        <button
-                                            type='button'
+                                        <Button
                                             disabled={!submitEnabled}
                                             className={`inline-flex ml-4 justify-center rounded-md border border-transparent ${
                                                 submitEnabled
-                                                    ? "bg-indigo-600"
-                                                    : "bg-grey-300"
-                                            } px-4 py-2 text-sm font-medium text-indigo-100 ${
+                                                    ? ""
+                                                    : ""
+                                            }  ${
                                                 submitEnabled
-                                                    ? "hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                                                    ? "hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                                                     : ""
                                             } transition-all duration-300`}
                                             onClick={onSubmit}
                                         >
                                             {submitText}
-                                        </button>
+                                        </Button>
                                     )}
-                                    <button
-                                        type='button'
-                                        className='inline-flex justify-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-900 hover:bg-indigo-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-all duration-300'
+                                    <Button
+                                        className="hover:bg-gray-600"
                                         onClick={onClose}
                                     >
                                         Close
-                                    </button>
+                                    </Button>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
