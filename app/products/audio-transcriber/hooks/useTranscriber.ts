@@ -1,8 +1,8 @@
 "use client"
 
 import { useCallback, useMemo, useState, useEffect } from "react";
-import { useWorker } from "./useWorker";
 import Constants from "../utils/Constants";
+import { useWorker } from "./useWorker";
 
 interface ProgressItem {
     file: string;
@@ -66,9 +66,9 @@ export function useTranscriber(): Transcriber {
     // HACK to prevent the component from rendering in the server side and causing a build error
     useEffect(() => {
         setIsMounted(true);
-      }, []);
+    }, []);
 
-    const webWorker = useWorker((event) => {
+    const handleMessage = (event: MessageEvent) => {
         const message = event.data;
         // Update the state with the result
         switch (message.status) {
@@ -132,7 +132,9 @@ export function useTranscriber(): Transcriber {
                 // initiate/download/done
                 break;
         }
-    });
+    };
+
+    const worker = useWorker(handleMessage);
 
     const [model, setModel] = useState<string>(Constants.DEFAULT_MODEL);
     const [subtask, setSubtask] = useState<string>(Constants.DEFAULT_SUBTASK);
@@ -172,7 +174,8 @@ export function useTranscriber(): Transcriber {
                     audio = audioData.getChannelData(0);
                 }
 
-                webWorker.postMessage({
+                if(!worker) throw new Error("Worker is not initialized");
+                worker.postMessage({
                     audio,
                     model,
                     multilingual,
@@ -183,7 +186,7 @@ export function useTranscriber(): Transcriber {
                 });
             }
         },
-        [webWorker, model, multilingual, quantized, subtask, language],
+        [worker, model, multilingual, quantized, subtask, language],
     );
 
     const transcriber = useMemo(() => {
