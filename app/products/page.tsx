@@ -12,7 +12,7 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 
 export default function ProductsPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <main className="flex-1 container mx-auto px-4 md:px-6 py-8">
         <h1 className="text-4xl font-bold mb-6 text-center">Our Products</h1>
         <p className="text-xl mb-8 text-center pt-2 pb-2">
