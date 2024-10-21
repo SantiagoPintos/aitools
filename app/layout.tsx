@@ -36,7 +36,9 @@ export default function RootLayout({
         <AppProvider>
           <ViewTransitions>
             <Navbar />
-              {children}
+              <div className="min-h-[85vh]">
+                {children}
+              </div>
             <Footer />
           </ViewTransitions>
         </AppProvider>

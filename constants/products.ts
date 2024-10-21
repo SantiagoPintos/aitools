@@ -18,19 +18,19 @@ export const products = [
       icon: Music,
       items: [
         {
-          name: "AI Audio Transcriber",
+          name: "Audio Transcriber",
           description: "Transcribe audio to text with high accuracy using our privacy-focused AI model.",
           action: "/products/audio-transcriber"
         }
       ],
-      comingSoon: true
+      comingSoon: false
     },
     {
       category: "Video",
       icon: Video,
       items: [
         {
-          name: "AI Video Summarizer",
+          name: "Video Summarizer",
           description: "Generate concise summaries of video content using cutting-edge AI technology.",
           action: "/products/video-summarizer"
         }
