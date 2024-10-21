@@ -1,14 +1,25 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface MessageEventHandler {
     (event: MessageEvent): void;
 }
 
-export function useWorker(messageEventHandler: MessageEventHandler): Worker {
-    // Create new worker once and never again
-    const [worker] = useState(() => createWorker(messageEventHandler));
+export function useWorker(messageEventHandler: MessageEventHandler) {
+    const [worker, setWorker] = useState<Worker | null>(null);
+
+    useEffect(() => {
+      // Crear un Worker solo cuando el componente está montado
+      const newWorker = createWorker(messageEventHandler);
+      setWorker(newWorker); 
+
+      // Limpiar el worker cuando el componente se desmonta
+      return () => {
+        newWorker.terminate();
+      };
+    }, []);  
+
     return worker;
 }
 
