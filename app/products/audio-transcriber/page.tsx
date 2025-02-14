@@ -1,11 +1,22 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { AudioManager } from "@/components/AudioManager";
 import Transcript from "@/components/Transcript";
 import { useTranscriber } from "@/app/products/audio-transcriber/hooks/useTranscriber";
 
 function App() {
+    const [isMounted, setIsMounted] = useState(false);
     const transcriber = useTranscriber();
+
+    // HACK to prevent the component from rendering in the server side and causing a build error
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+      return null;
+    }
 
     return (
         <div className='flex flex-col justify-center items-center dark:bg-gray-900'>
