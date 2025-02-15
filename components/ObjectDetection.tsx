@@ -6,6 +6,7 @@ import { COLOURS } from '@/constants/colours';
 import { Control } from '@/components/Control';
 import { Loading } from '@/components/Loading';
 import { Error } from '@/components/Error';
+import './ObjectDetectionStyles.css'
 
 type ModelStatus = 'Loading model' | 'Ready' | 'Error';
 
