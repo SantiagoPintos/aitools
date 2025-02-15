@@ -1,6 +1,7 @@
 import React from "react";
-import ObjectDetection from "@/components/ObjectDetection"
-import './styles.css';
+import dynamic from "next/dynamic";
+
+const ObjectDetection = dynamic(() => import("@/components/ObjectDetection"), { ssr: false });
 
 const Home : React.FC = () => {
     return (
