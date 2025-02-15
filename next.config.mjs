@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    basePath: '/privateia/',
+    basePath: '/privateia',
     assetPrefix: '/privateia/',
     webpack: (config, { isServer }) => {
         config.experiments = {
