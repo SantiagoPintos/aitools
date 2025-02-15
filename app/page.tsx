@@ -1,15 +1,13 @@
-"use client";
 import React, { useEffect } from 'react';
-import Landing from '../components/Landing';
+import Landing from '../components/Home';
+import Footer from '@/components/Footer';
 
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    sessionStorage.clear();
-  }, []);
   return (
     <div>
       <Landing />
+      <Footer />
     </div>
   );
 };

@@ -26,7 +26,7 @@ function App() {
                 Audio Transcriber
               </h1>
               <p className='text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
-                Transcribe your audio with complete privacy. Our tool processes your audio directly on your device,
+                The AI model processes your audio directly on your device,
                 ensuring that your data never leaves your browser or gets sent to any external servers.
               </p>
             </div>

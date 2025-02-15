@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { AppProvider } from "@/context/ImageContext";
 import { ViewTransitions } from "next-view-transitions";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 import localFont from "next/font/local";
 import "./globals.css";
@@ -19,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Privateia",
+  title: "AI tools",
   description: "Private AI tools for everyone",
 };
 
@@ -35,11 +33,9 @@ export default function RootLayout({
       >
         <AppProvider>
           <ViewTransitions>
-            <Navbar />
               <div className="min-h-[85vh]">
                 {children}
               </div>
-            <Footer />
           </ViewTransitions>
         </AppProvider>
       </body>
