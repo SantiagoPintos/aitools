@@ -1,0 +1,13 @@
+.bounding-box {
+    position: absolute;
+    box-sizing: border-box;
+    border: solid 2px;
+}
+  
+  .bounding-box-label {
+    color: white;
+    position: absolute;
+    font-size: 12px;
+    margin: -16px 0 0 -2px;
+    padding: 1px;
+}
