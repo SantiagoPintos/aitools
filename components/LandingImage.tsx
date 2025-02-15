@@ -47,10 +47,9 @@ export default function LandingImage() {
   }
 
   return (
-        <div className="flex flex-col md:flex-row min-h-[80vh] justify-center ">
-          <div className="flex-1 p-8 lg:px-4 md:p-16 md:pt-0 flex flex-col justify-center max-w-2xl h-4/5">
+        <div className="flex flex-col md:flex-row min-h-[90vh] justify-center md:mt-16">
+          <div className="flex-1 p-8 lg:px-4 md:p-16 max-w-2xl h-4/5">
             <div className="lg:px-14">
-              <ImageOverlay originalSrc={'/assets/landing.png'} processedSrc={'/assets/landing.jpg'} alt={'Image'} />
               <h1 className="text-4xl font-bold mb-4">
                 Private<br />
                 background remover
@@ -58,8 +57,6 @@ export default function LandingImage() {
               <p className="text-gray-600 mb-8">
                 Transform images instantly with on-device AI.
                 <br /> Everything happens in your browser.
-                <br /> Always free.
-                <br /> Completely private.
               </p>
               <div className="lg:hidden">
                 <label className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer">
@@ -75,7 +72,7 @@ export default function LandingImage() {
               </div>
             </div>
           </div>
-          <div className={`hidden lg:flex flex-1 p-8 lg:px-4 md:p-16 md:pt-1 justify-center max-w-2xl `}>
+          <div className="hidden lg:flex flex-1 p-8 lg:px-4 md:p-16 md:pt-1 justify-center max-w-2xl">
             <div className={`border-2 border-dashed rounded-lg flex items-center justify-center h-4/5 w-4/5 ${
               dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
             }`}
