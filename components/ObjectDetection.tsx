@@ -118,9 +118,11 @@ const ObjectDetection: FC = () => {
   };
 
   useEffect(() => {
+    let stream: MediaStream | null = null;
+
     const startVideoStream = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
         if (!videoRef.current) return;
 
         videoRef.current.srcObject = stream;
@@ -144,7 +146,15 @@ const ObjectDetection: FC = () => {
     };
 
     if (status === 'Ready') startVideoStream();
-  }, [status]);
+
+    return () => {
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        if (videoRef.current) videoRef.current.srcObject = null;
+      }
+    };
+  }, [status, scale]);
 
   return (
     <div className="h-full flex flex-col items-center justify-center py-4 px-8">
